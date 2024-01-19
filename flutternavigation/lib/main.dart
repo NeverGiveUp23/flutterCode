@@ -16,9 +16,10 @@ class MyApp extends StatelessWidget {
       home: const MyHomePage(),
       debugShowCheckedModeBanner: false,
       routes: {
-        'Named Route':(context) => const NamedRoute(),
-        'home':(context) => const MyHomePage(),
-        '/secondPage':(context) => const SecondPage()
+        'Named Route': (context) => const NamedRoute(),
+        'home': (context) => const MyHomePage(),
+        'firstPage': (context) => const FirstPage(),
+        '/secondPage': (context) => const SecondPage()
       },
     );
   }
@@ -43,9 +44,10 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           TextButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const FirstPage(name: "Felix")));
+            onPressed: () async {
+              final response = await Navigator.pushNamed(context, 'firstPage',
+                  arguments: "Felix");
+              print(response);
             },
             child: const Text("First page"),
           ),
