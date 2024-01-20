@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutternavigation/pages/first.dart';
 import 'package:flutternavigation/pages/namedRoute.dart';
@@ -25,6 +26,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
+int volume = 0;
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -33,6 +36,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,11 +47,30 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          
+          IconButton(
+            icon: const Icon(Icons.volume_up),
+            tooltip: "Increase",
+            onPressed: () {
+              setState(() {
+                volume += 10;
+              });
+            },
+          ),
+          Text("Volume: $volume"),
+
+          // Mute Button
+          TextButton(onPressed: () {
+            setState(() {
+              volume = 0;
+            });
+          }, child: const Text("Mute")),
+
+
           TextButton(
             onPressed: () async {
               final response = await Navigator.pushNamed(context, 'firstPage',
                   arguments: "Felix");
-              print(response);
             },
             child: const Text("First page"),
           ),
