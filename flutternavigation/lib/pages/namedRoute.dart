@@ -13,8 +13,6 @@ class NamedRoute extends StatelessWidget {
         content: const Text('Proceed with destructive action?'),
         actions: <CupertinoDialogAction>[
           CupertinoDialogAction(
-            /// This parameter indicates this action is the default,
-            /// and turns the action's text to bold text.
             isDefaultAction: true,
             onPressed: () {
               Navigator.pop(context);
@@ -22,14 +20,12 @@ class NamedRoute extends StatelessWidget {
             child: const Text('No'),
           ),
           CupertinoDialogAction(
-            /// This parameter indicates the action would perform
-            /// a destructive action such as deletion, and turns
-            /// the action's text color to red.
             isDestructiveAction: true,
             onPressed: () {
-              Navigator.pop(context);
+              // you can pass in a route to go to page like so.
+              Navigator.pushNamed(context, '/secondPage');
             },
-            child: const Text('Yes'),
+            child: const Text('Go to Page'),
           ),
         ],
       ),
@@ -43,7 +39,7 @@ class NamedRoute extends StatelessWidget {
       navigationBar: const CupertinoNavigationBar(middle: Text("Hello")),
       child: Center(
         child: CupertinoButton(
-          child: const Text("Cupertino Dialog"),
+          child: const Text("Alert"),
           onPressed: () => _showAlertDialog(context),
         ),
       ),
