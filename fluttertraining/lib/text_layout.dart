@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TextLayout extends StatelessWidget {
   const TextLayout({super.key});
@@ -25,10 +26,13 @@ class TextLayout extends StatelessWidget {
         const Divider(),
 
         RichText(
-          text: const TextSpan(
+          text:  TextSpan(
             text: 'Flutter text is ',
-            style: TextStyle(fontSize: 22, color: Colors.black),
-            children: <TextSpan>[
+            style: GoogleFonts.leckerliOne(
+              fontSize: 22, 
+              color: Colors.black
+              ),
+            children: const <TextSpan>[
               TextSpan(
                 text: 'Really ',
                 style: TextStyle(

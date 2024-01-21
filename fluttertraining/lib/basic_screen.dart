@@ -17,15 +17,35 @@ class BasicScreen extends StatelessWidget {
           )
         ],
       ),
-      body: const Column(
+
+
+
+
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AspectRatio(
-          aspectRatio: 1.0,
-          child: ImmutabbleWidget(),
-        ),
-        TextLayout(),
+          // adding image to widget
+          Semantics(
+            image: true,
+            label: 'A beautiful Beach',
+            child: Image.asset(
+              'assets/beach.jpg'
+              )
+            ),
+
+        //   AspectRatio(
+        //   aspectRatio: 1.0,
+        //   child: ImmutabbleWidget(),
+        // ),
+
+        const TextLayout(),
         ],
       ),
+
+
+
+
+      
       // Adding a drawer in the code
       drawer: Drawer(
         child: Container(
