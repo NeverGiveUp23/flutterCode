@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertraining/immutable_widget.dart';
+import 'package:fluttertraining/text_layout.dart';
 
 class BasicScreen extends StatelessWidget {
   const BasicScreen({super.key});
@@ -16,13 +17,15 @@ class BasicScreen extends StatelessWidget {
           )
         ],
       ),
-      body: const Center(
-        child: AspectRatio(
+      body: const Column(
+        children: [
+          AspectRatio(
           aspectRatio: 1.0,
           child: ImmutabbleWidget(),
-        )
+        ),
+        TextLayout(),
+        ],
       ),
-      
       // Adding a drawer in the code
       drawer: Drawer(
         child: Container(
