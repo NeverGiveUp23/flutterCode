@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertraining/basic_screen.dart';
 import 'package:fluttertraining/immutable_widget.dart';
 
 void main() => runApp(const StaticApp());
@@ -14,7 +15,7 @@ class StaticApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ImmutabbleWidget(),
+      home: const BasicScreen(),
     );
   }
 }
