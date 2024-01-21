@@ -31,6 +31,23 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    
+    final hiddenPassword = obsureText == true
+        ? TextButton(
+            onPressed: () {
+              setState(() {
+                obsureText = false;
+              });
+            },
+            child: const Text("Show Password"))
+        : TextButton(
+            onPressed: () {
+              setState(() {
+                obsureText = true;
+              });
+            },
+            child: const Text("Hide Password"));
+
     return Scaffold(
         appBar: AppBar(
           title: const Text("Twitter"),
@@ -56,22 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   debugPrint("Password: ${_passwordControler.text}");
                 },
                 child: const Text("Submit")),
-                // password show / hid
-                obsureText == true ? 
-            TextButton(
-                onPressed: () {
-                  setState(() {
-                    obsureText = false;
-                  });
-                },
-                child:const Text("Show Password")) :
-                TextButton(
-                    onPressed: () {
-                      setState(() {
-                        obsureText = true;
-                      });
-                    },
-                    child: const Text("Hide Password"))
+            // password show / hid
+            hiddenPassword
           ]),
         ));
   }
