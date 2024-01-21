@@ -6,23 +6,14 @@ class ImmutabbleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.green,
-      child: Padding(
-        padding:  const EdgeInsets.all(40),
-        child: Container(
+      color: Colors.amber,
+      padding: const EdgeInsets.all(40),
+      child: Container(
+        color: Colors.red,
+        padding: const EdgeInsets.all(60),
+        child: const ColoredBox(
           color: Colors.blue,
-          child: Padding(
-            padding: const EdgeInsets.all(50.0),
-            child: Container(
-              color: Colors.purple,
-              child: const Column(
-                children: [
-                  Text("Hello"),
-                ]
-              ),
-            ),
-            ),
-        )
+          ),
       )
     );
   }
