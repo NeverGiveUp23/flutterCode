@@ -24,7 +24,7 @@ class BasicScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // adding image to widget
+          // adding image to widget w/ semantics for Accesiblity
           Semantics(
             image: true,
             label: 'A beautiful Beach',
@@ -45,7 +45,7 @@ class BasicScreen extends StatelessWidget {
 
 
 
-      
+
       // Adding a drawer in the code
       drawer: Drawer(
         child: Container(
