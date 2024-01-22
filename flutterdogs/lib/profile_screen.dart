@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdogs/star.dart';
 
 class ProfileScren extends StatelessWidget {
   const ProfileScren({super.key});
@@ -10,7 +11,7 @@ class ProfileScren extends StatelessWidget {
           children: [
             Image.asset('assets/beach.jpg'),
             Transform.translate(
-              offset: const Offset(0, 70),
+              offset: const Offset(0,100),
               child: const Column(
                 children: [
                   ProfileImage(),
@@ -54,6 +55,7 @@ class ProfileDetails extends StatelessWidget {
               'Wolfram Bark',
               style: TextStyle(fontSize: 35, fontWeight: FontWeight.w600),
             ),
+            const StarRating(value: 5),
             _buildDetailsRow('Age', '4'),
             _buildDetailsRow('Status', 'Good Boy'),
           ],
@@ -62,7 +64,8 @@ class ProfileDetails extends StatelessWidget {
 
   Widget _buildDetailsRow(String heading, String value) {
     return Row(children: [
-      Text('$heading: ', style: const TextStyle(fontWeight: FontWeight.bold))
+      Text('$heading: ', style: const TextStyle(fontWeight: FontWeight.bold)),
+      Text(value)
     ]);
   }
 }
