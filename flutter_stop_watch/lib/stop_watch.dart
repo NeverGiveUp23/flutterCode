@@ -49,18 +49,42 @@ class _StopWatchState extends State<StopWatch> {
     });
   }
 
-  void _stopTimer() {
-    final totalRuntime = laps.fold(milliseconds, (total, lap) => total + lap);
+  void _stopTimer(BuildContext context) {
+    // final totalRuntime = laps.fold(milliseconds, (total, lap) => total + lap);
 
-    final alert = PlatformAlert(
-        title: 'Run Completed',
-        message: 'Total Run Time is ${_secondsText(totalRuntime)}');
-
-    alert.show(context);
-    timer.cancel();
+    // final alert = PlatformAlert(
+    //     title: 'Run Completed',
+    //     message: 'Total Run Time is ${_secondsText(totalRuntime)}');
     setState(() {
+      timer.cancel();
       isTicking = false;
     });
+
+    final controller =
+        showBottomSheet(context: context, builder: _buildRunCompletionSheet);
+
+  // close the controller that shows time final timer. 
+    Future.delayed(const Duration(seconds: 3)).then((_) => controller.close());
+  }
+
+  Widget _buildRunCompletionSheet(BuildContext context) {
+    final totalRuntime = laps.fold(milliseconds, (total, lap) => total + lap);
+    final textTheme = Theme.of(context).textTheme;
+
+    return SafeArea(
+        child: Container(
+            color: Theme.of(context).cardColor,
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('Run Finished', style: textTheme.headlineSmall),
+                  Text('Total Run Time is ${_secondsText(totalRuntime)}')
+                ],
+              ),
+            )));
   }
 
   void _resetTimer() {
@@ -170,13 +194,15 @@ class _StopWatchState extends State<StopWatch> {
         const SizedBox(
           width: 20,
         ),
-        TextButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
-            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        Builder(
+          builder: (context) => TextButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            ),
+            onPressed: isTicking ? () => _stopTimer(context) : null,
+            child: const Text('Stop'),
           ),
-          onPressed: isTicking ? _stopTimer : null,
-          child: const Text('Stop'),
         ),
         const SizedBox(width: 20),
         TextButton(
