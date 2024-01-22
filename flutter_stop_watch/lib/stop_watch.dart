@@ -80,8 +80,11 @@ class _StopWatchState extends State<StopWatch> {
       // improve the scroll in case large data of laps
       child: ListView.builder(
           controller: scrollController,
-          itemExtent: itemHeight,
-          itemCount: laps.length,
+          itemExtent: itemHeight, // supplies a fixed height
+          itemCount: laps.length, // builder needs this to determine how long the list will be or else flutter will think it is infinite. => will get out of bounds error.
+
+
+          // itemBuilder solves this problem by enabling deferred rendering. We are no longer providing Flutter with a list of widgets. Instead, we are waiting for Flutter to use what it needs and only creating widgets for a subset of our list.
           itemBuilder: (context, index) {
             final milliseconds = laps[index];
             return ListTile(
@@ -96,7 +99,7 @@ class _StopWatchState extends State<StopWatch> {
 // cancel the timer to stop
   void dispose() {
     timer.cancel();
-    scrollController.dispose();
+    scrollController.dispose(); // disppose the list
     super.dispose();
   }
 
