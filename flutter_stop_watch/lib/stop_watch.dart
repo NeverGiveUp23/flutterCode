@@ -12,8 +12,12 @@ class StopWatch extends StatefulWidget {
 class _StopWatchState extends State<StopWatch> {
   int milliseconds = 0;
   bool isTicking = false;
+
   late Timer timer;
   final laps = <int>[];
+
+  final itemHeight = 60.0;
+  final scrollController = ScrollController();
 
   // @override
   // void initState() {
@@ -61,20 +65,38 @@ class _StopWatchState extends State<StopWatch> {
       laps.add(milliseconds);
       milliseconds = 0;
     });
+
+// laps can be long o we need to improve it in case laps get long
+    scrollController.animateTo(
+      itemHeight * laps.length,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeIn,
+    );
   }
 
   Widget _buildDisplay() {
-    return ListView(children: [
-      for (int milliseconds in laps)
-        ListTile(
-          title: Text(_secondsText(milliseconds)),
-        )
-    ]);
+    // widget to show the scroll bar
+    return Scrollbar(
+      // improve the scroll in case large data of laps
+      child: ListView.builder(
+          controller: scrollController,
+          itemExtent: itemHeight,
+          itemCount: laps.length,
+          itemBuilder: (context, index) {
+            final milliseconds = laps[index];
+            return ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 50),
+              title: Text('Lap ${index + 1}'),
+              trailing: Text(_secondsText(milliseconds)),
+            );
+          }),
+    );
   }
 
 // cancel the timer to stop
   void dispose() {
     timer.cancel();
+    scrollController.dispose();
     super.dispose();
   }
 
