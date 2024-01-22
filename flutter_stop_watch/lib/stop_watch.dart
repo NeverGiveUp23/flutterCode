@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class StopWatch extends StatefulWidget {
@@ -105,7 +104,12 @@ class _StopWatchState extends State<StopWatch> {
                   child: const Text('Stop'),
                 ),
                 const SizedBox(width: 20),
-                CupertinoButton.filled(
+                ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.yellow.shade900),
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white)),
                     onPressed: _resetTimer,
                     child: const Text('Reset'))
               ],
