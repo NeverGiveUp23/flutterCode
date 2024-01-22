@@ -1,9 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_stop_watch/platform_alert.dart';
 
 class StopWatch extends StatefulWidget {
-  const StopWatch({super.key});
+  final String name;
+  final String email;
+  const StopWatch({super.key, required this.name, required this.email});
 
   @override
   State<StopWatch> createState() => _StopWatchState();
@@ -47,6 +50,13 @@ class _StopWatchState extends State<StopWatch> {
   }
 
   void _stopTimer() {
+    final totalRuntime = laps.fold(milliseconds, (total, lap) => total + lap);
+
+    final alert = PlatformAlert(
+        title: 'Run Completed',
+        message: 'Total Run Time is ${_secondsText(totalRuntime)}');
+
+    alert.show(context);
     timer.cancel();
     setState(() {
       isTicking = false;
@@ -81,8 +91,8 @@ class _StopWatchState extends State<StopWatch> {
       child: ListView.builder(
           controller: scrollController,
           itemExtent: itemHeight, // supplies a fixed height
-          itemCount: laps.length, // builder needs this to determine how long the list will be or else flutter will think it is infinite. => will get out of bounds error.
-
+          itemCount: laps
+              .length, // builder needs this to determine how long the list will be or else flutter will think it is infinite. => will get out of bounds error.
 
           // itemBuilder solves this problem by enabling deferred rendering. We are no longer providing Flutter with a list of widgets. Instead, we are waiting for Flutter to use what it needs and only creating widgets for a subset of our list.
           itemBuilder: (context, index) {
@@ -113,7 +123,7 @@ class _StopWatchState extends State<StopWatch> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('StopWatch'),
+          title: Text(widget.name),
         ),
         body: Column(children: [
           Expanded(child: _buildCounter(context)),

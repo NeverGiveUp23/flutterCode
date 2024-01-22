@@ -55,7 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: Form(
           // for multiple fields
-          child: Column(children: <Widget>[
+          child: Column(
+            children: <Widget>[
             // textFormField -> comes with validator class
             TextFormField(
               controller: _emailController,
