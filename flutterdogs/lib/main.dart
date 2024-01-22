@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdogs/deep_tree.dart';
 import 'package:flutterdogs/flex_screen.dart';
 import 'package:flutterdogs/profile_screen.dart';
 
@@ -16,10 +17,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primarySwatch: Colors.green,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const ProfileScren(),
+      home: const DeepTree(),
     );
   }
 }
